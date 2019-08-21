@@ -1,0 +1,24 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Register</title>
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+	</head>
+	<body>
+		<form method="POST">
+			{% csrf_token %}
+			<div class = "container">
+				<div class="row">
+					<h2>Sign Up</h2>
+				</div>
+				<div class = "row">
+					<div class="col-sm-6">{% crispy form %}</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6"><input type="submit" value="Sign up" class="btn btn-primary pull-right"></div>
+				</div>
+			</div>
+		</form>
+	</body>
+</html>

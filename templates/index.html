@@ -1,0 +1,101 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Index</title>
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+         
+  {% comment %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> {% endcomment %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+  {% if user.is_authenticated %}
+    <nav class="navbar navbar-right">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <span class="navbar-brand" href="#"></span>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><span></span></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"> {{user}}
+            <span class="caret "></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="logout"><span class="glyphicon glyphicon-log-out"> Logout</span></a></li>
+            </ul>
+          </li>
+          <li><a href=""><span class="glyphicon glyphicon-home"> Home</a></li>
+          <li><a href="request"><span class="glyphicon glyphicon-share"> Share</a></li>
+        </ul>
+      </div>
+    </nav>
+  {% else %}
+    <nav>
+    <div class="nav-wrapper">
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li><a href="/"><span class="glyphicon glyphicon-home"> Home</a></li>
+    </ul>
+    </nav>  
+  {% endif %}
+  <br>
+   <!--                   SEARCH OPTION           -->
+  
+</div>
+<nav>
+    <div class="nav-wrapper">
+      <form method="POST">
+      {% csrf_token %}
+        <div class="input-field">
+          <input id="search" type="search" name="title" placeholder="Search Problem" required>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+    </div>
+  </nav>
+ 
+  
+<!--        END  SEARCH OPTION           -->
+  <h2 class="row">Latest Problems</h2>
+  <p class="row">Latest problems from Codechef, Hackerearth and Hackerrank</p>          
+  <table class="highlight centered">
+    <thead>
+      <tr>
+        <th>Problem Code</th>
+        <th>Link</th>
+        <th>Last Modified</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for q in questions %}
+        <tr>
+          <td><a href="{{q.id}}"><b>{{q.title}}<b></a></td>
+          <td><a href="{{q.problemLink}}">Problem</a></td>
+          <td>{{q.pub_date}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</body>
+</html>
